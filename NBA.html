@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA球星殿堂</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 50px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-title::after {
+      content: "";
+      width: 100px;
+      height: 4px;
+      background: #ff3c3c;
+      display: block;
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    /* 头部 */
+    header {
+      background-color: rgba(20, 20, 20, 0.95);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #ff3c3c;
+    }
+
+    .logo h1 {
+      font-size: 22px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-menu a {
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: #ff3c3c;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* 英雄区 */
+    .hero {
+      height: 90vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://pic.17qq.com/uploads/17/71/77/66/1771776635.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #ff3c3c;
+      border-radius: 50px;
+      font-weight: bold;
+    }
+
+    /* 关于 */
+    .about {
+      background: #1a1a1a;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .about-img {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ff3c3c;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-text h3 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: #ff3c3c;
+    }
+
+    .about-text p {
+      font-size: 18px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    /* 球星卡片 */
+    .players {
+      background: #121212;
+    }
+
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .player-card {
+      background: #1a1a1a;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .player-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .player-img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+    }
+
+    .player-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .player-info h4 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .player-info p {
+      color: #999;
+    }
+
+    /* 荣誉 */
+    .skills {
+      background: #1a1a1a;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .skill-card {
+      background: #222;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #333;
+    }
+
+    .skill-card i {
+      font-size: 40px;
+      color: #ff3c3c;
+      margin-bottom: 15px;
+    }
+
+    /* 底部 */
+    footer {
+      background: #0a0a0a;
+      text-align: center;
+      padding: 30px 0;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 20px;
+        gap: 15px;
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero-content h1 {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="https://img.qqzt.net/upload/2024/0520/20240520104712_7859.jpg" alt="NBA Logo">
+        <h1>NBA球星殿堂</h1>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#home">首页</a></li>
+        <li><a href="#about">科比</a></li>
+        <li><a href="#players">现役球星</a></li>
+        <li><a href="#skills">荣誉</a></li>
+      </ul>
+      <div class="menu-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>NBA 球星殿堂</h1>
+      <p>历史传奇与现役巨星，一网打尽</p>
+      <a href="#players" class="hero-btn">查看球星</a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title">黑曼巴 · 科比</h2>
+      <div class="about-content">
+        <img src="https://img1.baidu.com/it/u=867254614,2164544122&fm=253&fmt=auto&app=138&f=JPEG" alt="科比" class="about-img">
+        <div class="about-text">
+          <h3>科比·布莱恩特</h3>
+          <p>20年湖人生涯，5届总冠军，18次全明星。</p>
+          <p>单场81分，历史第二高分。</p>
+          <p>曼巴精神：永不言弃，极致自律。</p>
+          <p>2020年入选篮球名人堂。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="players" id="players">
+    <div class="container">
+      <h2 class="section-title">现役超级巨星</h2>
+      <div class="players-grid">
+        <div class="player-card">
+          <img src="https://img0.baidu.com/it/u=265056789,123456789&fm=253&fmt=auto" alt="詹姆斯" class="player-img">
+          <div class="player-info">
+            <h4>勒布朗·詹姆斯</h4>
+            <p>洛杉矶湖人</p>
+          </div>
+        </div>
+        <div class="player-card">
+          <img src="https://img2.baidu.com/it/u=345678901,234567890&fm=253&fmt=auto" alt="库里" class="player-img">
+          <div class="player-info">
+            <h4>斯蒂芬·库里</h4>
+            <p>金州勇士</p>
+          </div>
+        </div>
+        <div class="player-card">
+          <img src="https://img1.baidu.com/it/u=123456789,987654321&fm=253&fmt=auto" alt="杜兰特" class="player-img">
+          <div class="player-info">
+            <h4>凯文·杜兰特</h4>
+            <p>菲尼克斯太阳</p>
+          </div>
+        </div>
+        <div class="player-card">
+          <img src="https://img0.baidu.com/it/u=678901234,567890123&fm=253&fmt=auto" alt="东契奇" class="player-img">
+          <div class="player-info">
+            <h4>卢卡·东契奇</h4>
+            <p>达拉斯独行侠</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills" id="skills">
+    <div class="container">
+      <h2 class="section-title">荣誉殿堂</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fas fa-trophy"></i>
+          <h4>总冠军</h4>
+          <p>联盟最高团队荣誉</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-star"></i>
+          <h4>全明星</h4>
+          <p>联盟顶级球星盛会</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-medal"></i>
+          <h4>MVP</h4>
+          <p>常规赛最有价值球员</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-fire"></i>
+          <h4>名人堂</h4>
+          <p>篮球运动员终极荣誉</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 NBA球星殿堂 | 曼巴精神永不落幕</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navMenu = document.querySelector('.nav-menu');
+
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-menu a').forEach(a => {
+      a.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
